@@ -13,6 +13,7 @@
         android:background="@drawable/profile_card_background"
         android:paddingHorizontal="24dp"
         android:elevation="8dp"
+        android:id="@+id/profile_card"
         android:paddingVertical="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -57,6 +58,34 @@
             app:layout_constraintTop_toTopOf="@id/iv_app_logo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+
+        android:id="@+id/rv_reports"
+        app:layout_constraintTop_toBottomOf="@id/profile_card"
+        tools:listitem="@layout/report_list_item_layout"
+        app:layout_constraintBottom_toTopOf="@id/btn_new_report"
+        android:layout_marginBottom="12dp"
+        android:layout_height="0dp" />
+
+    <View
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_reports"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/md_theme_onPrimary"
+        android:layout_height="0dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btn_new_report"
+        android:text="@string/buat_laporan_baru_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="wrap_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

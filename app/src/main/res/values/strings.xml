@@ -2,4 +2,7 @@
     <string name="app_name">Fleetify Report</string>
     <string name="version_1_0_0_text">Version 1.0.0</string>
     <string name="laporan_keluhan_kendaraan_title">Laporan Keluhan Kendaraan</string>
+    <string name="laporan_keluhan_card_title">Laporan Keluhan</string>
+    <string name="catatan_keluhan_title">Catatan Keluhan:</string>
+    <string name="buat_laporan_baru_btn">Buat Laporan Baru</string>
 </resources>
