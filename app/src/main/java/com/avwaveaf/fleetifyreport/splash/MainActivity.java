@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setupWindowInsets();
-
-        // Delay navigation by 1500ms
         setupDelayAndNavigation();
     }
 
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             // Navigate to HomeActivity
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
             finish();
-        }, 1500); // 1500ms delay
+        }, 1500);
     }
 
     private void setupWindowInsets() {

@@ -82,6 +82,7 @@
         android:text="@string/buat_laporan_baru_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
+        android:textColor="@color/md_theme_onSurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="16dp"

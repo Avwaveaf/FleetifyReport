@@ -5,4 +5,5 @@
     <string name="laporan_keluhan_card_title">Laporan Keluhan</string>
     <string name="catatan_keluhan_title">Catatan Keluhan:</string>
     <string name="buat_laporan_baru_btn">Buat Laporan Baru</string>
+    <string name="form_laporan_keluhan_dialog_title">Form Laporan Keluhan</string>
 </resources>

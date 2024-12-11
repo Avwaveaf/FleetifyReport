@@ -55,18 +55,28 @@
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <style name="TextHeadingMediumDM" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <style name="TextHeadingSmallDM" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TextHeadingSmall" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Subtitle Styles -->
@@ -74,6 +84,7 @@
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Body Text Styles -->
@@ -81,25 +92,28 @@
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <style name="TextBodyMediumDM" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <style name="TextBodySmallDM" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_caption</item>
         <item name="android:fontFamily">@font/dmsans</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Caption Styles -->
     <style name="TextCaptionDM" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_caption</item>
         <item name="android:fontFamily">@font/dmsans</item>
-        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Heading Styles with Inter Semi-Bold -->
@@ -107,14 +121,15 @@
         <item name="android:textSize">24sp</item>
         <item name="android:fontFamily">@font/inter_semi_bold</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
+
 
     <style name="TextHeadingMedium" parent="TextAppearance.AppCompat">
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/inter_semi_bold</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Body Text Styles with Inter Regular -->
@@ -122,14 +137,14 @@
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <style name="TextBodyMedium" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <!-- Caption Styles with Inter Regular -->
@@ -137,5 +152,16 @@
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
+    <style name="TransparentDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
     </style>
 </resources>

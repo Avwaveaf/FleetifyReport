@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.avwaveaf.fleetifyreport.R;
 import com.avwaveaf.fleetifyreport.databinding.ActivityHomeBinding;
+import com.avwaveaf.fleetifyreport.new_report.NewReportDialogFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -29,6 +30,16 @@ public class HomeActivity extends AppCompatActivity {
         setupWindowInsets();
         setupViewModel();
         observeViewModel();
+        setupBtnCrateReportListener();
+    }
+
+    private void setupBtnCrateReportListener() {
+        binding.btnNewReport.setOnClickListener(v->showCreateNewReportDialog());
+    }
+
+    private void showCreateNewReportDialog() {
+        NewReportDialogFragment dialog = new NewReportDialogFragment();
+        dialog.show(getSupportFragmentManager(), NewReportDialogFragment.NEW_REPORT_DIALOG_FRAGMENT_TAG);
     }
 
     private void observeViewModel() {

@@ -2,11 +2,19 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape android:shape="oval">
+            <!-- Transparent outside area -->
+            <solid android:color="@android:color/transparent"/>
+            <!-- Oval color inside -->
+            <size android:width="100dp" android:height="100dp"/> <!-- You can adjust the size -->
             <solid android:color="@color/md_theme_primary"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="oval">
+            <!-- Transparent outside area -->
+            <solid android:color="@android:color/transparent"/>
+            <!-- Oval color inside -->
+            <size android:width="100dp" android:height="100dp"/> <!-- Adjust size accordingly -->
             <solid android:color="@color/md_theme_tertiary"/>
         </shape>
     </item>
