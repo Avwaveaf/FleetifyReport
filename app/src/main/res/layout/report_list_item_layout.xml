@@ -201,10 +201,11 @@
             android:textColor="@color/md_theme_tertiary"
             android:layout_height="wrap_content" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="78dp"
             android:id="@+id/iv_note_image"
-            tools:src="@mipmap/ic_launcher_round"
+            android:background="@color/md_theme_surfaceContainerHigh"
+            app:shapeAppearanceOverlay="@style/roundedCorners"
             android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/iv_note_icon"
             app:layout_constraintEnd_toEndOf="@id/vehicle_number_container"

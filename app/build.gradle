@@ -35,9 +35,44 @@ android {
 
 dependencies {
 
+    //CAMERA X
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+
+    //LISTENABLE FUTURE
+    implementation libs.guava
+
+    // GLIDE
+    implementation libs.glide
+
+    // CHUCKER
+    debugImplementation(libs.library)
+    releaseImplementation(libs.library.no.op)
+
+    // SHIMMER LOADING
+    implementation(libs.shimmer)
+
+    // LOGGING INTERCEPTOR
+    implementation libs.logging.interceptor
+
+    // RETROFIT
+    implementation libs.retrofit
+    implementation libs.adapter.rxjava3
+    implementation libs.converter.gson
+
+    // RXJAVA
+    implementation libs.rxjava
+    implementation libs.rxandroid
+
     // LOMBOK
     implementation libs.lombok
     annotationProcessor libs.lombok
+
+    // ROOM
+    implementation libs.room.runtime
+    annotationProcessor libs.room.compiler
+    implementation libs.androidx.room.rxjava3
 
     // LIVECYCLE COMPONENT
     // ViewModel
@@ -49,10 +84,13 @@ dependencies {
     implementation libs.hilt.android
     annotationProcessor libs.hilt.compiler
 
+    // CORE ANDROID
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
     implementation libs.constraintlayout
+
+    // TEST
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp">
+
+    <!-- Vehicle Type Text -->
+    <TextView
+        android:id="@+id/vehicle_type_shimmer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:background="@color/md_theme_surface"
+        android:gravity="start|center_vertical"
+        android:textAppearance="@style/TextBodyMedium"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- License Number Text -->
+    <TextView
+        android:id="@+id/license_number_shimmer"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:background="@color/md_theme_surface"
+        android:gravity="start|center_vertical"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
+</LinearLayout>

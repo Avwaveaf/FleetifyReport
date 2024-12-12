@@ -6,6 +6,16 @@
     android:background="@drawable/bg_report_dialog"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/btn_iv_close_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/tutup_dialog_description"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/circle_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/circle_view" />
+
     <View
         android:id="@+id/circle_view"
         android:layout_width="38dp"
@@ -58,15 +68,183 @@
             android:src="@drawable/ic_calendar" />
 
         <TextView
+            android:id="@+id/tv_report_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:text="Senin, 1 Jan - 12:30"
             android:textAppearance="@style/TextBodyMedium"
             android:textColor="@color/md_theme_onSurface"
             android:textStyle="bold" />
     </LinearLayout>
 
+
+    <Spinner
+        android:id="@+id/vehicle_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_outlines_container_16"
+        android:gravity="center"
+        android:paddingVertical="12dp"
+        android:paddingStart="46dp"
+        android:paddingEnd="16dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/report_date_container" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/simmer_load_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/iv_spinner_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_spinner_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_spinner_icon"
+        app:shimmer_duration="800">
+
+        <include layout="@layout/vehicle_spinner_dropdown_item_shimmer" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ImageView
+        android:id="@+id/iv_spinner_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="12dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_truck"
+        app:layout_constraintBottom_toBottomOf="@id/vehicle_spinner"
+
+        app:layout_constraintStart_toStartOf="@id/vehicle_spinner"
+        app:layout_constraintTop_toTopOf="@id/vehicle_spinner" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/note_report_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_outlines_container_16"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_spinner">
+
+        <ImageView
+            android:id="@+id/iv_note_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_note"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_report_note_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/catatan_keluhan_title"
+            android:textAppearance="@style/TextBodyMedium"
+            android:textColor="@color/md_theme_onSurface"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_note_report"
+            app:layout_constraintTop_toTopOf="@id/iv_note_report" />
+
+        <EditText
+            android:id="@+id/edt_note_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_edt_overlay"
+            android:hint="@string/masukan_keluhan_disini_edt_hint"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:textAppearance="@style/TextBodyMedium"
+            android:textColor="@color/md_theme_onSurface"
+            android:textColorHint="@color/md_theme_inversePrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_report_note_title"
+            app:layout_constraintStart_toStartOf="@id/tv_report_note_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_report_note_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_note_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/catatan_keluhan_tidak_boleh_kosong_err"
+        android:textAppearance="@style/TextCaption"
+        android:textColor="@color/md_theme_error"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/note_report_container" />
+
+    <TextView
+        android:id="@+id/tv_report_doc_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dokumen_laporan_title"
+        android:textAppearance="@style/TextBodyMedium"
+        android:textColor="@color/md_theme_onSurface"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_note_error" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_note_image"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/md_theme_background"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_report_doc_title"
+        app:shapeAppearanceOverlay="@style/roundedCorners" />
+
+    <TextView
+        android:id="@+id/tv_image_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/dokumen_laporan_tidak_boleh_kosong_err"
+        android:textAppearance="@style/TextCaption"
+        android:textColor="@color/md_theme_error"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/iv_note_image" />
+
+    <Button
+        android:id="@+id/btn_take_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/md_theme_primary"
+        android:enabled="true"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="0dp"
+        android:text="@string/ambil_foto_btn_text"
+        app:layout_constraintBottom_toBottomOf="@id/iv_note_image"
+        app:layout_constraintStart_toEndOf="@id/iv_note_image"
+        app:layout_constraintTop_toTopOf="@id/iv_note_image" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_send_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_custom_button"
+        android:enabled="false"
+        android:text="@string/kirim_laporan_btn_text"
+        android:textAppearance="@style/TextBodyMedium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_image_error"
+        app:shapeAppearance="@style/roundedCorners" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -109,6 +109,13 @@
         <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
+    <style name="TextBodySmall" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+    </style>
+
     <!-- Caption Styles -->
     <style name="TextCaptionDM" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_caption</item>
@@ -164,4 +171,5 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
+
 </resources>

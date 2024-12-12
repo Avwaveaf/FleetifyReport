@@ -6,4 +6,18 @@
     <string name="catatan_keluhan_title">Catatan Keluhan:</string>
     <string name="buat_laporan_baru_btn">Buat Laporan Baru</string>
     <string name="form_laporan_keluhan_dialog_title">Form Laporan Keluhan</string>
+    <string name="masukan_keluhan_disini_edt_hint">Masukan keluhan disini</string>
+    <string name="dokumen_laporan_title">Dokumen Laporan</string>
+    <string name="ambil_foto_btn_text">Ambil Foto</string>
+    <string name="kirim_laporan_btn_text">Kirim Laporan</string>
+    <string name="tutup_dialog_description">Tutup Dialog</string>
+    <string name="pilih_sumber_ambil_gambar_prompt">Pilih sumber ambil gambar</string>
+    <string name="take_photo_prompt">Buka Kamera\n</string>
+    <string name="choose_from_gallery_prompt">Pilih Dari Galleri</string>
+    <string name="izin_kamera_prompt">Izin kamera diperlukan untuk mengambil foto.</string>
+    <string name="gagal_mengambil_foto">Gagal Mengambil Foto!\n\n</string>
+    <string name="permission_denied_please_grant_the_permission_to_proceed">Izin dibatalkan, Mohon aktifkan izin yang dibutuhkan</string>
+    <string name="this_permission_is_required_to_select_an_image">Izin ini dibuthkan untuk mengambil gambar dari galeri\n</string>
+    <string name="catatan_keluhan_tidak_boleh_kosong_err">Catatan keluhan tidak boleh kosong!</string>
+    <string name="dokumen_laporan_tidak_boleh_kosong_err">Dokumen laporan tidak boleh kosong!</string>
 </resources>
