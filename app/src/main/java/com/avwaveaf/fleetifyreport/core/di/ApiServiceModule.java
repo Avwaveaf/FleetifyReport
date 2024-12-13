@@ -1,5 +1,6 @@
 package com.avwaveaf.fleetifyreport.core.di;
 
+import com.avwaveaf.fleetifyreport.core.data.api_services.ReportApiService;
 import com.avwaveaf.fleetifyreport.core.data.api_services.VehicleApiService;
 
 import javax.inject.Singleton;
@@ -18,5 +19,11 @@ public class ApiServiceModule {
     @Singleton
     public VehicleApiService provideVehicleApiService(Retrofit retrofit) {
         return retrofit.create(VehicleApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    public ReportApiService provideReportApiService(Retrofit retrofit) {
+        return retrofit.create(ReportApiService.class);
     }
 }

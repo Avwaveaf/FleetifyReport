@@ -1,9 +1,12 @@
 package com.avwaveaf.fleetifyreport.core.di;
 
 import com.avwaveaf.fleetifyreport.core.domain.repository.ProfileRepository;
+import com.avwaveaf.fleetifyreport.core.domain.repository.ReportRepository;
 import com.avwaveaf.fleetifyreport.core.domain.repository.VehicleRepository;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.profile.ProfileUseCase;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.AddReportUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.vehicle.GetVehicleUseCase;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.AddReportInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.profile.ProfileInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.vehicle.GetVehicleInteractor;
 
@@ -26,5 +29,10 @@ public class UseCaseModule {
     @Provides
     public GetVehicleUseCase provideGetVehicleInteractor(VehicleRepository vehicleRepository) {
         return new GetVehicleInteractor(vehicleRepository);
+    }
+
+    @Provides
+    public AddReportUseCase provodeAddReportUseCase(ReportRepository reportRepository) {
+        return new AddReportInteractor(reportRepository);
     }
 }

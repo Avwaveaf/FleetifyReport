@@ -12,11 +12,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +35,13 @@ import com.avwaveaf.fleetifyreport.R;
 import com.avwaveaf.fleetifyreport.core.domain.entity.Vehicle;
 import com.avwaveaf.fleetifyreport.core.ui.adapters.VehicleSpinnerAdapter;
 import com.avwaveaf.fleetifyreport.core.utils.DateTimeUtil;
+import com.avwaveaf.fleetifyreport.core.utils.FileUtil;
 import com.avwaveaf.fleetifyreport.databinding.CreateNewReportDialogBinding;
 import com.avwaveaf.fleetifyreport.take_picture.CameraActivity;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -48,12 +51,15 @@ public class NewReportDialogFragment extends DialogFragment {
     public static final String NEW_REPORT_DIALOG_FRAGMENT_TAG = "NewReportDialogFragment";
 
     private static final long DEBOUNCE_DELAY = 300;
+    private static final long SUCCESS_DELAY = 3000;
     private final Handler debounceHandler = new Handler();
     private Runnable debounceRunnable;
 
     private CreateNewReportDialogBinding binding;
 
     private VehicleViewModel vehicleViewModel;
+    private AddReportViewModel addReportViewModel;
+
     private Uri selectedImageUri;
     private final ActivityResultLauncher<Intent> cameraResultLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -109,6 +115,7 @@ public class NewReportDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = CreateNewReportDialogBinding.inflate(inflater, container, false);
         vehicleViewModel = new ViewModelProvider(this).get(VehicleViewModel.class);
+        addReportViewModel = new ViewModelProvider(this).get(AddReportViewModel.class);
         return binding.getRoot();
     }
 
@@ -126,6 +133,37 @@ public class NewReportDialogFragment extends DialogFragment {
     }
 
     private void setupSubmitReportObserver() {
+        addReportViewModel.addReportResult.observe(getViewLifecycleOwner(), status -> {
+            if (status != null) {
+                switch (status.getStatus()) {
+                    case SUCCESS:
+                        binding.btnSendReport.setEnabled(false);
+                        setLoadingDisplayVisibility(false);
+                        setSuccessDisplayVisibility(true);
+                        new Handler(Looper.getMainLooper()).postDelayed(this::dismiss, SUCCESS_DELAY);
+                        break;
+                    case ERROR:
+                        setLoadingDisplayVisibility(false);
+                        setSuccessDisplayVisibility(false);
+                        Snackbar.make(binding.getRoot(), status.getMessage(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case LOADING:
+                        setSuccessDisplayVisibility(false);
+                        setLoadingDisplayVisibility(true);
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setSuccessDisplayVisibility(boolean isVisible) {
+        int visibility = isVisible ? View.VISIBLE : View.GONE;
+        binding.reportSuccess.setVisibility(visibility);
+    }
+
+    private void setLoadingDisplayVisibility(boolean isVisible) {
+        int visibility = isVisible ? View.VISIBLE : View.GONE;
+        binding.loadingProgress.setVisibility(visibility);
     }
 
     private void setupVehicleObserver() {
@@ -173,7 +211,7 @@ public class NewReportDialogFragment extends DialogFragment {
         binding.tvReportDate.setText(DateTimeUtil.getCurrentTimeFormatted());
         binding.btnIvCloseDialog.setOnClickListener(v -> dismiss());
         binding.edtNoteReport.addTextChangedListener(getNoteTextWatcher());
-        binding.btnSendReport.setOnClickListener(v-> handleReportSubmission());
+        binding.btnSendReport.setOnClickListener(v -> handleReportSubmission());
         binding.btnTakePhoto.setOnClickListener(v -> showImageSourceDialog());
     }
 
@@ -182,6 +220,7 @@ public class NewReportDialogFragment extends DialogFragment {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Cancel any pending callbacks
@@ -193,6 +232,7 @@ public class NewReportDialogFragment extends DialogFragment {
                 debounceRunnable = () -> validateForm();
                 debounceHandler.postDelayed(debounceRunnable, DEBOUNCE_DELAY);
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
             }
@@ -201,15 +241,22 @@ public class NewReportDialogFragment extends DialogFragment {
 
     private void handleReportSubmission() {
         if (validateForm()) {
-            Toast.makeText(requireActivity(), "fdsf", Toast.LENGTH_LONG).show();
+            try {
+                File img = FileUtil.uriToFile(selectedImageUri, requireContext());
+                String vehicleNumber = ((Vehicle) binding.vehicleSpinner.getSelectedItem()).getId();
+                String note = binding.edtNoteReport.getText().toString();
+                addReportViewModel.addReport(vehicleNumber, note, "k7jPfBcEjFnSlG2", img);
+            } catch (IOException e) {
+                Snackbar.make(binding.getRoot(), R.string.gagal_memproses_dokumen_foto_err, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 
-    private Boolean isNoteEmpty(){
+    private Boolean isNoteEmpty() {
         return TextUtils.isEmpty(binding.edtNoteReport.getText().toString().trim());
     }
 
-    private Boolean isNoteAttachmentExist(){
+    private Boolean isNoteAttachmentExist() {
         return selectedImageUri != null;
     }
 
@@ -225,13 +272,8 @@ public class NewReportDialogFragment extends DialogFragment {
         boolean isFormValid = isNoteValid && isImageValid;
         binding.btnSendReport.setEnabled(isFormValid);
 
-        // Debug logs
-        Log.d("FormValidation", "isNoteValid: " + isNoteValid + ", isImageValid: " + isImageValid);
-        Log.d("FormValidation", "Submit Button Enabled: " + isFormValid);
-
         return isFormValid;
     }
-
 
 
     private void showImageSourceDialog() {

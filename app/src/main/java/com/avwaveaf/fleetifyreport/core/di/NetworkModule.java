@@ -3,6 +3,7 @@ package com.avwaveaf.fleetifyreport.core.di;
 import android.content.Context;
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor;
+import com.google.gson.GsonBuilder;
 
 import javax.inject.Singleton;
 
@@ -46,7 +47,11 @@ public class NetworkModule {
     @Singleton
     public Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(
+                        new GsonBuilder()
+                                .setLenient()
+                                .create()
+                ))
                 .baseUrl(BASE_URL) // Replace with your base URL
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())

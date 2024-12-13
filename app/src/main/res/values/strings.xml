@@ -20,4 +20,8 @@
     <string name="this_permission_is_required_to_select_an_image">Izin ini dibuthkan untuk mengambil gambar dari galeri\n</string>
     <string name="catatan_keluhan_tidak_boleh_kosong_err">Catatan keluhan tidak boleh kosong!</string>
     <string name="dokumen_laporan_tidak_boleh_kosong_err">Dokumen laporan tidak boleh kosong!</string>
+    <string name="gagal_memproses_dokumen_foto_err">Gagal memproses dokumen foto!</string>
+    <string name="mohon_tunggu_sebentar_sedang_mengirim_report_loading">Mohon tunggu sebentar, sedang mengirim report..</string>
+    <string name="laporan_berhasil_dibuat_text">Laporan Berhasil Dibuat!</string>
+    <string name="laporan_kamu_akan_kami_proses_paling_lambat_3x24_jam">Laporan kamu akan kami proses paling lambat 3x24 jam</string>
 </resources>
