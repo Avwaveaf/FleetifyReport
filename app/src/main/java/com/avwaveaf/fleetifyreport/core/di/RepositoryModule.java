@@ -1,5 +1,7 @@
 package com.avwaveaf.fleetifyreport.core.di;
 
+import android.content.Context;
+
 import com.avwaveaf.fleetifyreport.core.data.data_source.local.profile.ProfileDataSource;
 import com.avwaveaf.fleetifyreport.core.data.data_source.local.report.ReportLocalDataSource;
 import com.avwaveaf.fleetifyreport.core.data.data_source.local.vehicle.VehicleLocalDataSource;
@@ -17,6 +19,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
 @Module
@@ -37,7 +40,7 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    public ReportRepository provideReportRepository(ReportRemoteDataSource reportRemoteDataSource, ReportLocalDataSource reportLocalDataSource) {
-        return new ReportRepositoryImpl(reportRemoteDataSource, reportLocalDataSource);
+    public ReportRepository provideReportRepository(ReportRemoteDataSource reportRemoteDataSource, ReportLocalDataSource reportLocalDataSource, @ApplicationContext Context context) {
+        return new ReportRepositoryImpl(reportRemoteDataSource, reportLocalDataSource, context);
     }
 }

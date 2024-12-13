@@ -18,7 +18,7 @@ public interface ReportApiService {
 
 
     @GET("api/android/read_all_laporan")
-    Single<List<ReportDTO>> getAllReports(
+    Single<Response<List<ReportDTO>>> getAllReports(
             @Query("userId") String userId,
             @Query("vehicleLicenseNumber") String vehicleLicenseNumber
     );

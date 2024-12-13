@@ -19,7 +19,7 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_marginStart="8dp"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             android:textAppearance="@style/TextHeadingSmallDM"
             app:layout_constraintStart_toEndOf="@id/circle_view_shimmer"
             app:layout_constraintTop_toTopOf="@id/circle_view_shimmer" />
@@ -47,7 +47,7 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextBodySmallDM"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             app:layout_constraintBottom_toBottomOf="@id/circle_view_shimmer"
             app:layout_constraintStart_toStartOf="@id/tv_report_title"
             app:layout_constraintTop_toBottomOf="@id/tv_report_title"
@@ -56,7 +56,7 @@
         <TextView
             android:id="@+id/tv_report_date"
             android:layout_width="82dp"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textAppearance="@style/TextBodySmallDM"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:elevation="0dp"
-            app:cardBackgroundColor="@color/md_theme_surface"
+            app:cardBackgroundColor="@color/md_theme_surfaceContainer"
             app:cardCornerRadius="4dp"
             style="@style/Widget.Material3.CardView.Filled"
             app:layout_constraintEnd_toEndOf="@id/tv_report_date"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:textAppearance="@style/TextCaption"
-                android:textColor="@color/md_theme_surface"
+                android:textColor="@color/md_theme_surfaceContainer"
                 tools:text="Status" />
 
         </androidx.cardview.widget.CardView>
@@ -101,7 +101,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:importantForAccessibility="no"
-            android:src="@color/md_theme_surface"
+            android:src="@color/md_theme_surfaceContainer"
             app:layout_constraintStart_toStartOf="@id/iv_report_logo"
             app:layout_constraintTop_toBottomOf="@id/headline_separator_shimmer" />
 
@@ -117,13 +117,13 @@
             app:layout_constraintEnd_toStartOf="@id/vehicle_number_container_shimmer"
             app:layout_constraintStart_toEndOf="@id/iv_vehicle_icon_shimmer"
             app:layout_constraintTop_toTopOf="@id/iv_vehicle_icon_shimmer"
-            android:background="@color/md_theme_surface" />
+            android:background="@color/md_theme_surfaceContainer" />
 
         <View
             android:id="@+id/vehicle_number_container_shimmer"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             app:layout_constraintBottom_toBottomOf="@id/iv_vehicle_icon_shimmer"
             app:layout_constraintEnd_toEndOf="@id/cv_status_shimmer"
             app:layout_constraintStart_toStartOf="@id/cv_status_shimmer"
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/vehicle_number_container_shimmer"
-            android:textColor="@color/md_theme_surface"
+            android:textColor="@color/md_theme_surfaceContainer"
             app:layout_constraintEnd_toEndOf="@id/vehicle_number_container_shimmer"
             app:layout_constraintStart_toStartOf="@id/vehicle_number_container_shimmer"
             app:layout_constraintTop_toTopOf="@id/vehicle_number_container_shimmer"
@@ -146,7 +146,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="12dp"
             android:importantForAccessibility="no"
-            android:src="@color/md_theme_surface"
+            android:src="@color/md_theme_surfaceContainer"
             app:layout_constraintEnd_toEndOf="@id/iv_vehicle_icon_shimmer"
             app:layout_constraintStart_toStartOf="@id/iv_vehicle_icon_shimmer"
             app:layout_constraintTop_toBottomOf="@id/iv_vehicle_icon_shimmer" />
@@ -160,7 +160,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_vehicle_name_shimmer"
             app:layout_constraintStart_toStartOf="@id/tv_vehicle_name_shimmer"
             app:layout_constraintTop_toTopOf="@id/iv_user_icon_shimmer"
-            android:background="@color/md_theme_surface" />
+            android:background="@color/md_theme_surfaceContainer" />
 
         <View
             android:id="@+id/ownership_separator_shimmer"
@@ -173,7 +173,7 @@
         <ImageView
             android:layout_width="24dp"
             android:id="@+id/iv_note_icon_shimmer"
-            android:importantForAccessibility="no" android:src="@color/md_theme_surface"
+            android:importantForAccessibility="no" android:src="@color/md_theme_surfaceContainer"
             app:layout_constraintStart_toStartOf="@id/iv_user_icon_shimmer"
             app:layout_constraintTop_toBottomOf="@id/ownership_separator_shimmer"
             android:layout_marginTop="16dp"
@@ -184,7 +184,7 @@
             android:id="@+id/tv_note_title_shimmer"
             app:layout_constraintTop_toTopOf="@id/iv_note_icon_shimmer"
             app:layout_constraintStart_toStartOf="@id/tv_user_name_shimmer"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             android:textAppearance="@style/TextBodyMediumDM"
             android:textStyle="bold"
             android:layout_height="wrap_content" />
@@ -193,9 +193,10 @@
             android:layout_width="0dp"
             android:id="@+id/tv_note_shimmer"
             app:layout_constraintTop_toBottomOf="@id/tv_note_title_shimmer"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@id/tv_user_name_shimmer"
             app:layout_constraintEnd_toStartOf="@id/iv_note_image"
-            android:background="@color/md_theme_surface"
+            android:background="@color/md_theme_surfaceContainer"
             android:textAppearance="@style/TextBodyMediumDM"
             android:layout_marginEnd="32dp"
             android:textColor="@color/md_theme_tertiary"
@@ -204,7 +205,7 @@
         <ImageView
             android:layout_width="78dp"
             android:id="@+id/iv_note_image"
-            tools:src="@color/md_theme_surface"
+            tools:src="@color/md_theme_surfaceContainer"
             android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/iv_note_icon_shimmer"
             app:layout_constraintEnd_toEndOf="@id/vehicle_number_container_shimmer"

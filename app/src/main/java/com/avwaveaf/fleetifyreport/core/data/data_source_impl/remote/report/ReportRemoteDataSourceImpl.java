@@ -34,8 +34,10 @@ public class ReportRemoteDataSourceImpl implements ReportRemoteDataSource {
     }
 
     @Override
-    public Observable<List<ReportDTO>> getAllReport(String userId, String vehicleLicenseNumber) {
+    public Observable<Resource<List<ReportDTO>>> getAllReport(String userId, String vehicleLicenseNumber) {
         return reportApiService.getAllReports(userId, vehicleLicenseNumber)
-                .toObservable();
+                .map(NetworkResponseUtil::handleListResponse)
+                .toObservable()
+                .onErrorResumeNext(throwable -> Observable.just(NetworkErrorUtil.handleError(throwable)));
     }
 }

@@ -1,14 +1,18 @@
 package com.avwaveaf.fleetifyreport.core.data.repository;
 
+import android.content.Context;
+
 import com.avwaveaf.fleetifyreport.core.data.data_source.local.report.ReportLocalDataSource;
 import com.avwaveaf.fleetifyreport.core.data.data_source.remote.report.ReportRemoteDataSource;
 import com.avwaveaf.fleetifyreport.core.data.entity.ReportDTO;
 import com.avwaveaf.fleetifyreport.core.data.mapper.ReportMapper;
 import com.avwaveaf.fleetifyreport.core.domain.entity.Report;
 import com.avwaveaf.fleetifyreport.core.domain.repository.ReportRepository;
+import com.avwaveaf.fleetifyreport.core.utils.ConnectivityUtil;
 import com.avwaveaf.fleetifyreport.core.utils.NetworkBoundResource;
 import com.avwaveaf.fleetifyreport.core.utils.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,11 +25,13 @@ import okhttp3.RequestBody;
 public class ReportRepositoryImpl implements ReportRepository {
     private final ReportRemoteDataSource reportRemoteDataSource;
     private final ReportLocalDataSource reportLocalDataSource;
+    private final Context context;
 
     @Inject
-    public ReportRepositoryImpl(ReportRemoteDataSource reportRemoteDataSource, ReportLocalDataSource reportLocalDataSource) {
+    public ReportRepositoryImpl(ReportRemoteDataSource reportRemoteDataSource, ReportLocalDataSource reportLocalDataSource, Context context) {
         this.reportRemoteDataSource = reportRemoteDataSource;
         this.reportLocalDataSource = reportLocalDataSource;
+        this.context = context;
     }
 
     @Override
@@ -35,18 +41,21 @@ public class ReportRepositoryImpl implements ReportRepository {
 
     @Override
     public Observable<Resource<List<Report>>> getAllReport(String userId, String vehicleLicenseNumber) {
-        return new NetworkBoundResource<List<Report>, List<ReportDTO>>() {
-
+        return new NetworkBoundResource<List<Report>, Resource<List<ReportDTO>>>() {
 
             @Override
-            protected Observable<List<ReportDTO>> createCall() {
+            protected Observable<Resource<List<ReportDTO>>> createCall() {
                 return reportRemoteDataSource.getAllReport(userId, vehicleLicenseNumber);
             }
 
             @Override
-            protected List<Report> processResponse(List<ReportDTO> response) {
-                return ReportMapper.toDomainList(response);
+            protected List<Report> processResponse(Resource<List<ReportDTO>> response) {
+                if (response.getData().isEmpty()) {
+                    return new ArrayList<>();
+                }
+                return ReportMapper.toDomainList(response.getData());
             }
+
 
             @Override
             protected void saveCallResult(List<Report> items) {
@@ -54,24 +63,35 @@ public class ReportRepositoryImpl implements ReportRepository {
             }
 
             @Override
-            protected Single<Boolean> shouldFetch() {
-                if (vehicleLicenseNumber.trim().isEmpty()) {
-                    return reportLocalDataSource.getReportsCount()
-                            .map(count -> count == 0);
+            protected Single<Boolean> shouldFetch(List<Report> cachedData) {
+                boolean net = ConnectivityUtil.isNetworkAvailable(context);
+                if (net) {
+                    if (vehicleLicenseNumber.trim().isEmpty()) {
+                        return reportLocalDataSource.getReportsCount()
+                                .map(count -> count == 0);
+                    } else {
+                        return reportLocalDataSource.getReportsCountByLicense("%" + vehicleLicenseNumber + "%")
+                                .map(count -> count == 0);
+                    }
+                } else {
+                    return Single.just(Boolean.FALSE);
                 }
-
-                return reportLocalDataSource.getReportsCountByLicense("%" + vehicleLicenseNumber + "%")
-                        .map(count -> count == 0);
             }
+
 
             @Override
             protected Observable<List<Report>> loadFromCache() {
+                // Your existing cache loading logic
                 if (vehicleLicenseNumber.trim().isEmpty()) {
                     return reportLocalDataSource.getCachedReports();
                 }
-
                 return reportLocalDataSource.getReportsByLicense("%" + vehicleLicenseNumber + "%");
             }
         }.asObservable();
+    }
+
+    @Override
+    public void deleteAllReports() {
+        reportLocalDataSource.deleteAll();
     }
 }

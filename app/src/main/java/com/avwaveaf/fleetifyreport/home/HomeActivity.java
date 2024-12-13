@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.avwaveaf.fleetifyreport.R;
 import com.avwaveaf.fleetifyreport.core.domain.entity.Report;
 import com.avwaveaf.fleetifyreport.core.ui.adapters.ReportAdapter;
+import com.avwaveaf.fleetifyreport.core.utils.ConnectivityUtil;
 import com.avwaveaf.fleetifyreport.core.utils.Resource;
 import com.avwaveaf.fleetifyreport.databinding.ActivityHomeBinding;
 import com.avwaveaf.fleetifyreport.new_report.NewReportDialogFragment;
@@ -32,7 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class HomeActivity extends AppCompatActivity {
 
-    private static final long DEBOUNCE_DELAY = 1600;
+    private static final long DEBOUNCE_DELAY = 1200;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable searchRunnable;
@@ -53,6 +54,20 @@ public class HomeActivity extends AppCompatActivity {
         setupBtnCrateReportListener();
         setupRecyclerView();
         setupSearchListener();
+        setupRefreshListener();
+        binding.btnClearSearch.setOnClickListener(l -> {
+            binding.edtSearchReport.setText("");
+            viewModel.loadAllReports();
+        });
+    }
+
+    private void setupRefreshListener() {
+        binding.srlRefresh.setOnRefreshListener(() -> {
+            if (ConnectivityUtil.isNetworkAvailable(this)) {
+                viewModel.refreshReports();
+            }
+            binding.srlRefresh.setRefreshing(false);
+        });
     }
 
     private void setupRecyclerView() {
@@ -80,19 +95,30 @@ public class HomeActivity extends AppCompatActivity {
         if (state != null) {
             switch (state.getStatus()) {
                 case SUCCESS:
-                    reportAdapter.submitList(state.getData());
+                    if (!state.getData().isEmpty()) {
+                        reportAdapter.submitList(state.getData());
+                    } else {
+                        showEmptyStateOfData(true);
+                    }
                     showLoading(false);
                     break;
                 case ERROR:
+                    showEmptyStateOfData(true);
                     Snackbar.make(binding.getRoot(), state.getMessage(), Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.coba_lagi_text_snackbar, v -> viewModel.loadAllReports())
                             .show();
                     break;
                 case LOADING:
+                    showEmptyStateOfData(false);
                     showLoading(true);
                     break;
             }
         }
+    }
+
+    private void showEmptyStateOfData(boolean isVisible) {
+        int visibility = isVisible ? View.VISIBLE : View.GONE;
+        binding.emptyStateLayout.setVisibility(visibility);
     }
 
     private void showLoading(boolean isLoading) {
@@ -109,10 +135,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onSearchButtonClick(View view) {
         if (binding.edtSearchReport.getVisibility() == View.GONE) {
-            // Show the EditText with fade-in animation
             fadeInEditText();
         } else {
-            // Hide the EditText with fade-out animation
             fadeOutEditText();
         }
     }
@@ -163,21 +187,32 @@ public class HomeActivity extends AppCompatActivity {
     private void setupSearchListener() {
         binding.edtSearchReport.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {}
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() > 0) {
+                    binding.btnClearSearch.setVisibility(View.VISIBLE);
+                    handler.removeCallbacks(searchRunnable);
+                    searchRunnable = () -> {
+                        String query = String.valueOf(binding.edtSearchReport.getText());
+                        viewModel.loadAllReports(query);
+                    };
+
+                    handler.postDelayed(searchRunnable, DEBOUNCE_DELAY);
+                } else {
+                    binding.btnClearSearch.setVisibility(View.GONE);
+                    handler.removeCallbacks(searchRunnable);
+                }
+
+
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacks(searchRunnable);
-                searchRunnable = () -> {
-                    String query = String.valueOf(editable);
-                    viewModel.loadAllReports(query);
-                };
-
-                handler.postDelayed(searchRunnable, DEBOUNCE_DELAY);
             }
         });
     }
+
 }

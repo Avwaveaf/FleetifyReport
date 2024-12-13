@@ -35,6 +35,9 @@ android {
 
 dependencies {
 
+    // SWIPE REFRESH
+    implementation(libs.androidx.swiperefreshlayout)
+
     //CAMERA X
     implementation(libs.androidx.camera.camera2)
     implementation(libs.camera.lifecycle)

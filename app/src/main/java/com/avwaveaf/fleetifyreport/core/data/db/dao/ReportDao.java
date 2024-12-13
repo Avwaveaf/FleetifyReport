@@ -17,15 +17,18 @@ public interface ReportDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertReports(List<Report> vehicles);
 
-    @Query("SELECT * FROM reports")
+    @Query("SELECT * FROM reports ORDER BY DATETIME(createdAt) DESC")
     Observable<List<Report>> getCachedReports();
 
     @Query("SELECT COUNT(*) FROM reports")
     Single<Long> getReportCounts();
 
-    @Query("SELECT * FROM reports WHERE vehicleLicenseNumber LIKE :vehicleLicenseNumber")
+    @Query("SELECT * FROM reports WHERE vehicleLicenseNumber LIKE :vehicleLicenseNumber ORDER BY DATETIME(createdAt) DESC")
     Observable<List<Report>> getReportsByLicense(String vehicleLicenseNumber);
 
     @Query("SELECT COUNT(*) FROM reports WHERE vehicleLicenseNumber LIKE :vehicleLicenseNumber")
     Single<Long> getReportCountsByLicense(String vehicleLicenseNumber);
+
+    @Query("DELETE FROM reports")
+    void deleteAllReports();
 }

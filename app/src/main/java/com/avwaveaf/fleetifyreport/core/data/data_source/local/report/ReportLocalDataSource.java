@@ -17,4 +17,6 @@ public interface ReportLocalDataSource {
     Observable<List<Report>> getReportsByLicense(String vehicleLicenseNumber);
 
     Single<Long> getReportsCountByLicense(String vehicleLicenseNumber);
+
+    void deleteAll();
 }

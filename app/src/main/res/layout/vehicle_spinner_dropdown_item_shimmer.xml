@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
-        android:background="@color/md_theme_surface"
+        android:background="@color/md_theme_surfaceContainer"
         android:gravity="start|center_vertical"
         android:textAppearance="@style/TextBodyMedium"
         android:textColor="@android:color/black"
@@ -25,7 +25,7 @@
         android:id="@+id/license_number_shimmer"
         android:layout_width="78dp"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_surface"
+        android:background="@color/md_theme_surfaceContainer"
         android:gravity="start|center_vertical"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp" />

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.avwaveaf.fleetifyreport.R;
 import com.avwaveaf.fleetifyreport.core.domain.entity.Report;
+import com.avwaveaf.fleetifyreport.core.utils.DateTimeUtil;
 import com.avwaveaf.fleetifyreport.databinding.ReportListItemLayoutBinding;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -65,7 +66,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         public void bind(Report report) {
             binding.tvReportTitle.setText(R.string.laporan_keluhan_card_title);
             binding.tvReportId.setText(report.getReportId());
-            binding.tvReportDate.setText(report.getCreatedAt());
+            binding.tvReportDate.setText(DateTimeUtil.formatDateTime(report.getCreatedAt()));
             binding.tvVehicleName.setText(report.getVehicleName());
             binding.tvVehicleNumber.setText(report.getVehicleLicenseNumber());
             binding.tvUserName.setText(report.getCreatedBy());

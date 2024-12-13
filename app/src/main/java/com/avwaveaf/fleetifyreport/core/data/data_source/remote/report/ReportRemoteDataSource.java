@@ -5,6 +5,7 @@ import com.avwaveaf.fleetifyreport.core.utils.Resource;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.MultipartBody;
@@ -18,7 +19,7 @@ public interface ReportRemoteDataSource {
             MultipartBody.Part photo
     );
 
-    Observable<List<ReportDTO>> getAllReport(
+    @NonNull Observable<Resource<List<ReportDTO>>> getAllReport(
             String userId,
             String vehicleLicenseNumber
     );

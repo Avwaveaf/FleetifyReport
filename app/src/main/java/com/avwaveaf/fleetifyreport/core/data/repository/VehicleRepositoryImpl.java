@@ -9,12 +9,12 @@ import com.avwaveaf.fleetifyreport.core.domain.repository.VehicleRepository;
 import com.avwaveaf.fleetifyreport.core.utils.NetworkBoundResource;
 import com.avwaveaf.fleetifyreport.core.utils.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Single;
 
 public class VehicleRepositoryImpl implements VehicleRepository {
 
@@ -31,17 +31,19 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
     @Override
     public Observable<Resource<List<Vehicle>>> getVehicles() {
-        return new NetworkBoundResource<List<Vehicle>, List<VehicleDTO>>() {
+        return new NetworkBoundResource<List<Vehicle>, Resource<List<VehicleDTO>>>() {
 
             @Override
-            protected Observable<List<VehicleDTO>> createCall() {
+            protected Observable<Resource<List<VehicleDTO>>> createCall() {
                 return vehicleRemoteDataSource.fetchVehicles();
             }
 
             @Override
-            protected List<Vehicle> processResponse(List<VehicleDTO> response) {
-                // Convert DTO to Domain model
-                return VehicleMapper.toDomainList(response);
+            protected List<Vehicle> processResponse(Resource<List<VehicleDTO>> response) {
+                if (response.getData().isEmpty()) {
+                    return new ArrayList<>();
+                }
+                return VehicleMapper.toDomainList(response.getData());
             }
 
             @Override
@@ -49,12 +51,6 @@ public class VehicleRepositoryImpl implements VehicleRepository {
                 vehicleLocalDataSource.saveVehicles(items);
             }
 
-
-            @Override
-            protected Single<Boolean> shouldFetch() {
-                return vehicleLocalDataSource.getVehicleCount()
-                        .map(count -> count == 0);
-            }
 
             @Override
             protected Observable<List<Vehicle>> loadFromCache() {

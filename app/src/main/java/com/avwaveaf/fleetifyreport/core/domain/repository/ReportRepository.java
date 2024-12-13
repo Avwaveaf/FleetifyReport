@@ -22,4 +22,6 @@ public interface ReportRepository {
             String userId,
             String vehicleLicenseNumber
     );
+
+    void deleteAllReports();
 }

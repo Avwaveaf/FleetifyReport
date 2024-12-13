@@ -67,29 +67,52 @@
             android:padding="16dp"
             android:visibility="gone"
             android:alpha="0"
+            tools:visibility="visible"
             android:hint="@string/masukan_plat_nomor_mobil_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="wrap_content" />
 
+        <ImageView
+            android:id="@+id/btn_clear_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/kosongkan_kolom_pencarian"
+            android:src="@drawable/ic_close"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="@id/edt_search_report"
+            app:layout_constraintEnd_toEndOf="@id/edt_search_report"
+            app:layout_constraintBottom_toBottomOf="@id/edt_search_report"
+            android:visibility="gone"
+        tools:visibility="visible" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_reports"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
+        android:id="@+id/srl_refresh"
         app:layout_constraintBottom_toTopOf="@id/btn_new_report"
+        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/profile_card"
-        tools:listitem="@layout/report_list_item_layout" />
+        android:layout_height="0dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_reports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
+            tools:listitem="@layout/report_list_item_layout" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/shimmer_loading"
-        app:layout_constraintBottom_toBottomOf="@id/rv_reports"
-        app:layout_constraintTop_toTopOf="@id/rv_reports"
-        app:shimmer_duration="400">
+        app:layout_constraintBottom_toBottomOf="@id/srl_refresh"
+        app:layout_constraintTop_toTopOf="@id/srl_refresh"
+        app:shimmer_duration="600">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,7 +132,7 @@
         android:layout_height="0dp"
         android:background="@color/md_theme_onPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_reports" />
+        app:layout_constraintTop_toBottomOf="@id/srl_refresh" />
 
     <Button
         android:id="@+id/btn_new_report"
@@ -122,6 +145,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/empty_state_layout"
+        android:visibility="gone"
+        android:background="@color/md_theme_onPrimary"
+        app:layout_constraintTop_toTopOf="@id/srl_refresh"
+        app:layout_constraintBottom_toBottomOf="@id/srl_refresh"
+        android:gravity="center"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_empty_state"
+            android:layout_height="64dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/data_kosong_state_title"
+            android:textAppearance="@style/TextHeadingMedium"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="@string/data_tidak_di_temukan_buat_laporan_baru_dengan_tombol_di_bawah_atau_cari_data_lain_empty_state_prompt"
+            android:textAppearance="@style/TextCaption"
+            android:layout_marginHorizontal="34dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/md_theme_tertiary"
+            android:textAlignment="center"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,4 +41,9 @@ public class ReportLocalDataSourceImpl implements ReportLocalDataSource {
     public Single<Long> getReportsCountByLicense(String vehicleLicenseNumber) {
         return reportDao.getReportCountsByLicense(vehicleLicenseNumber);
     }
+
+    @Override
+    public void deleteAll() {
+        reportDao.deleteAllReports();
+    }
 }

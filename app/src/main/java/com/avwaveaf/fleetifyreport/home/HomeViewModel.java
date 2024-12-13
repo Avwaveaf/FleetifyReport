@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.avwaveaf.fleetifyreport.core.domain.entity.Profile;
 import com.avwaveaf.fleetifyreport.core.domain.entity.Report;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.profile.ProfileUseCase;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.DeleteAllReportUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.GetAllReportUseCase;
 import com.avwaveaf.fleetifyreport.core.utils.NetworkErrorUtil;
 import com.avwaveaf.fleetifyreport.core.utils.Resource;
@@ -23,6 +24,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 @HiltViewModel
 public class HomeViewModel extends ViewModel {
     private final GetAllReportUseCase getAllReportUseCase;
+    private final DeleteAllReportUseCase deleteAllReportUseCase;
 
     private final CompositeDisposable disposable = new CompositeDisposable();
 
@@ -32,8 +34,9 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Resource<List<Report>>> reportState = _reportState;
 
     @Inject
-    public HomeViewModel(GetAllReportUseCase getAllReportUseCase, ProfileUseCase profileUseCase) {
+    public HomeViewModel(GetAllReportUseCase getAllReportUseCase, DeleteAllReportUseCase deleteAllReportUseCase, ProfileUseCase profileUseCase) {
         this.getAllReportUseCase = getAllReportUseCase;
+        this.deleteAllReportUseCase = deleteAllReportUseCase;
         this.profileUseCase = profileUseCase;
         loadProfile();
         loadAllReports();
@@ -48,6 +51,20 @@ public class HomeViewModel extends ViewModel {
         profile.setValue(fetchedProfile);
     }
 
+    public void loadAllReports() {
+        _reportState.postValue(Resource.loading(null));
+
+        // Pass vehicleNumber as a parameter to the use case
+        disposable.add(getAllReportUseCase.execute("k7jPfBcEjFnSlG2", "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        _reportState::postValue,
+                        throwable -> _reportState.postValue(NetworkErrorUtil.handleError(throwable))
+                ));
+    }
+
+
     public void loadAllReports(String vehicleNumber) {
         _reportState.postValue(Resource.loading(null));
 
@@ -56,22 +73,22 @@ public class HomeViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        _reportState::postValue,  // On success, post the result
+                        _reportState::postValue,
                         throwable -> _reportState.postValue(NetworkErrorUtil.handleError(throwable))
-                ));
+                ))
+        ;
     }
 
-    public void loadAllReports() {
+    public void refreshReports() {
         _reportState.postValue(Resource.loading(null));
-
-        disposable.add(getAllReportUseCase.execute("k7jPfBcEjFnSlG2", "")
+        disposable.add(deleteAllReportUseCase.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        _reportState::postValue,  // On success, post the result
-                        throwable -> _reportState.postValue(NetworkErrorUtil.handleError(throwable))
+                        this::loadAllReports
                 ));
     }
+
 
     @Override
     protected void onCleared() {
