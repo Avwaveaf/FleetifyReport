@@ -22,6 +22,5 @@ public class VehicleRemoteDataSourceImpl implements VehicleRemoteDataSource {
     public Observable<List<VehicleDTO>> fetchVehicles() {
         return vehicleApiService.getVehicleList()
                 .toObservable();
-
     }
 }

@@ -45,11 +45,13 @@
             app:layout_constraintTop_toTopOf="@id/circle_view" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextBodySmallDM"
             android:id="@+id/tv_report_id"
+            app:layout_constraintEnd_toStartOf="@id/cv_status"
             android:textColor="@color/md_theme_tertiary"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@id/circle_view"
             app:layout_constraintStart_toStartOf="@id/tv_report_title"
             app:layout_constraintTop_toBottomOf="@id/tv_report_title"
@@ -134,6 +136,7 @@
             android:id="@+id/tv_vehicle_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextCaption"
             app:layout_constraintBottom_toBottomOf="@id/vehicle_number_container"
             app:layout_constraintEnd_toEndOf="@id/vehicle_number_container"
             app:layout_constraintStart_toStartOf="@id/vehicle_number_container"

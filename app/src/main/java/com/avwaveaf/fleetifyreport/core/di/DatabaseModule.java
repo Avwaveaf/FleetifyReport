@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.room.Room;
 
 import com.avwaveaf.fleetifyreport.core.data.db.FleetifyDatabase;
+import com.avwaveaf.fleetifyreport.core.data.db.dao.ReportDao;
 import com.avwaveaf.fleetifyreport.core.data.db.dao.VehicleDao;
 
 import javax.inject.Singleton;
@@ -31,5 +32,10 @@ public class DatabaseModule {
     @Singleton
     public VehicleDao provideVehicleDao(FleetifyDatabase database) {
         return database.vehicleDao();
+    }
+    @Provides
+    @Singleton
+    public ReportDao provideReportDao(FleetifyDatabase database) {
+        return database.reportDao();
     }
 }

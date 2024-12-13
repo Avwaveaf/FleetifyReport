@@ -20,6 +20,6 @@ public interface VehicleDao {
     @Query("SELECT * FROM vehicles")
     Observable<List<Vehicle>> getCachedVehicles();
 
-    @Query("SELECT COUNT(*) FROM vehicles")  // Adjust table name if needed
+    @Query("SELECT COUNT(*) FROM vehicles")
     Single<Long> getVehicleCount();
 }

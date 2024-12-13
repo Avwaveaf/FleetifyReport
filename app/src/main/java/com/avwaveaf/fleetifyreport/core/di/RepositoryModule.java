@@ -1,6 +1,7 @@
 package com.avwaveaf.fleetifyreport.core.di;
 
 import com.avwaveaf.fleetifyreport.core.data.data_source.local.profile.ProfileDataSource;
+import com.avwaveaf.fleetifyreport.core.data.data_source.local.report.ReportLocalDataSource;
 import com.avwaveaf.fleetifyreport.core.data.data_source.local.vehicle.VehicleLocalDataSource;
 import com.avwaveaf.fleetifyreport.core.data.data_source.remote.report.ReportRemoteDataSource;
 import com.avwaveaf.fleetifyreport.core.data.data_source.remote.vehicle.VehicleRemoteDataSource;
@@ -24,7 +25,7 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    public ProfileRepository provideProfileRepository(ProfileDataSource profileDataSource){
+    public ProfileRepository provideProfileRepository(ProfileDataSource profileDataSource) {
         return new ProfileRepositoryImpl(profileDataSource);
     }
 
@@ -36,7 +37,7 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    public ReportRepository provideReportRepository(ReportRemoteDataSource reportRemoteDataSource) {
-        return new ReportRepositoryImpl(reportRemoteDataSource);
+    public ReportRepository provideReportRepository(ReportRemoteDataSource reportRemoteDataSource, ReportLocalDataSource reportLocalDataSource) {
+        return new ReportRepositoryImpl(reportRemoteDataSource, reportLocalDataSource);
     }
 }

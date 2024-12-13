@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".home.HomeActivity">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/profile_card_background"
-        android:paddingHorizontal="24dp"
         android:elevation="8dp"
-        android:id="@+id/profile_card"
+        android:paddingHorizontal="24dp"
         android:paddingVertical="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +36,7 @@
             android:text="@string/laporan_keluhan_kendaraan_title"
             android:textAppearance="@style/TextBodyMedium"
             app:layout_constraintStart_toStartOf="@id/iv_app_logo"
-            app:layout_constraintTop_toBottomOf="@id/iv_app_logo" />
+            app:layout_constraintTop_toBottomOf="@id/edt_search_report" />
 
         <TextView
             android:id="@+id/tv_full_name"
@@ -57,36 +58,70 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_app_logo" />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_search_report"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_search"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_rounded_edt"
+            android:padding="16dp"
+            android:visibility="gone"
+            android:alpha="0"
+            android:hint="@string/masukan_plat_nomor_mobil_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-
         android:id="@+id/rv_reports"
-        app:layout_constraintTop_toBottomOf="@id/profile_card"
-        tools:listitem="@layout/report_list_item_layout"
-        app:layout_constraintBottom_toTopOf="@id/btn_new_report"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginBottom="12dp"
-        android:layout_height="0dp" />
+        app:layout_constraintBottom_toTopOf="@id/btn_new_report"
+        app:layout_constraintTop_toBottomOf="@id/profile_card"
+        tools:listitem="@layout/report_list_item_layout" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/shimmer_loading"
+        app:layout_constraintBottom_toBottomOf="@id/rv_reports"
+        app:layout_constraintTop_toTopOf="@id/rv_reports"
+        app:shimmer_duration="400">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/report_list_item_shimmer_layout" />
+
+            <include layout="@layout/report_list_item_shimmer_layout" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <View
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_reports"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
         android:background="@color/md_theme_onPrimary"
-        android:layout_height="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_reports" />
 
     <Button
-        android:layout_width="match_parent"
         android:id="@+id/btn_new_report"
-        android:text="@string/buat_laporan_baru_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/md_theme_onSurface"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_height="wrap_content" />
+        android:layout_marginBottom="16dp"
+        android:text="@string/buat_laporan_baru_btn"
+        android:textColor="@color/md_theme_onSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

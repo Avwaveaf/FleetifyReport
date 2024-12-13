@@ -1,4 +1,4 @@
-package com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor;
+package com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report;
 
 import com.avwaveaf.fleetifyreport.core.domain.repository.ReportRepository;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.AddReportUseCase;

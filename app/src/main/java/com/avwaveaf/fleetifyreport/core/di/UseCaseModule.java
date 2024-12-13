@@ -5,9 +5,11 @@ import com.avwaveaf.fleetifyreport.core.domain.repository.ReportRepository;
 import com.avwaveaf.fleetifyreport.core.domain.repository.VehicleRepository;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.profile.ProfileUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.AddReportUseCase;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.GetAllReportUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.vehicle.GetVehicleUseCase;
-import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.AddReportInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.profile.ProfileInteractor;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report.AddReportInteractor;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report.GetAllReportInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.vehicle.GetVehicleInteractor;
 
 import javax.inject.Singleton;
@@ -22,17 +24,27 @@ import dagger.hilt.components.SingletonComponent;
 public class UseCaseModule {
     @Provides
     @Singleton
-    public ProfileUseCase provideProfileUseCase(ProfileRepository profileRepository){
+    public ProfileUseCase provideProfileUseCase(ProfileRepository profileRepository) {
         return new ProfileInteractor(profileRepository);
     }
 
     @Provides
+    @Singleton
     public GetVehicleUseCase provideGetVehicleInteractor(VehicleRepository vehicleRepository) {
         return new GetVehicleInteractor(vehicleRepository);
     }
 
     @Provides
+    @Singleton
     public AddReportUseCase provodeAddReportUseCase(ReportRepository reportRepository) {
         return new AddReportInteractor(reportRepository);
     }
+
+
+    @Provides
+    @Singleton
+    public GetAllReportUseCase provideGetAllReportUseCase(ReportRepository reportRepository) {
+        return new GetAllReportInteractor(reportRepository);
+    }
+
 }

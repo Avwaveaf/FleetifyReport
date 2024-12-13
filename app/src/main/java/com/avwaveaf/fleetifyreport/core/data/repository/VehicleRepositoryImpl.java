@@ -53,7 +53,7 @@ public class VehicleRepositoryImpl implements VehicleRepository {
             @Override
             protected Single<Boolean> shouldFetch() {
                 return vehicleLocalDataSource.getVehicleCount()
-                        .map(count -> count == 0);  // Fetch if no data or refresh triggered
+                        .map(count -> count == 0);
             }
 
             @Override

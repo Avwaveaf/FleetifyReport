@@ -137,7 +137,6 @@ public class NewReportDialogFragment extends DialogFragment {
             if (status != null) {
                 switch (status.getStatus()) {
                     case SUCCESS:
-                        binding.btnSendReport.setEnabled(false);
                         setLoadingDisplayVisibility(false);
                         setSuccessDisplayVisibility(true);
                         new Handler(Looper.getMainLooper()).postDelayed(this::dismiss, SUCCESS_DELAY);
@@ -159,11 +158,13 @@ public class NewReportDialogFragment extends DialogFragment {
     private void setSuccessDisplayVisibility(boolean isVisible) {
         int visibility = isVisible ? View.VISIBLE : View.GONE;
         binding.reportSuccess.setVisibility(visibility);
+        binding.btnSendReport.setEnabled(false);
     }
 
     private void setLoadingDisplayVisibility(boolean isVisible) {
         int visibility = isVisible ? View.VISIBLE : View.GONE;
         binding.loadingProgress.setVisibility(visibility);
+        binding.btnSendReport.setEnabled(false);
     }
 
     private void setupVehicleObserver() {

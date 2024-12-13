@@ -24,4 +24,6 @@
     <string name="mohon_tunggu_sebentar_sedang_mengirim_report_loading">Mohon tunggu sebentar, sedang mengirim report..</string>
     <string name="laporan_berhasil_dibuat_text">Laporan Berhasil Dibuat!</string>
     <string name="laporan_kamu_akan_kami_proses_paling_lambat_3x24_jam">Laporan kamu akan kami proses paling lambat 3x24 jam</string>
+    <string name="coba_lagi_text_snackbar">Coba Lagi</string>
+    <string name="masukan_plat_nomor_mobil_hint">Masukan Plat Nomor Mobil</string>
 </resources>

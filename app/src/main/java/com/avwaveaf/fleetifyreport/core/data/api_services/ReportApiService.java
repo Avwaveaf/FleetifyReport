@@ -1,5 +1,9 @@
 package com.avwaveaf.fleetifyreport.core.data.api_services;
 
+import com.avwaveaf.fleetifyreport.core.data.entity.ReportDTO;
+
+import java.util.List;
+
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -14,7 +18,7 @@ public interface ReportApiService {
 
 
     @GET("api/android/read_all_laporan")
-    Single<Response<Object>> getAllReports(
+    Single<List<ReportDTO>> getAllReports(
             @Query("userId") String userId,
             @Query("vehicleLicenseNumber") String vehicleLicenseNumber
     );
