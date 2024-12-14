@@ -30,7 +30,7 @@ The app handles various data states (loading, success, error, empty) and is buil
 The app is organized using **Clean Architecture** principles:
 
 - **Core**: Contains base DI setup, network communication (Retrofit), data sources, domain logic (use cases), and utility classes.
-- **Features**: Each feature is organized in its own module with a focus on encapsulation and separation of concerns. Features include report creation, listing, searching, etc.
+- **Features**: Each feature is organized in its own package with a focus on encapsulation and separation of concerns. Features include report creation, listing, searching, etc.
   
 ## Setup Instructions
 
