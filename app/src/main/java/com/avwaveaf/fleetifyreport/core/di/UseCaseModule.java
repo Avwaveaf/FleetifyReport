@@ -6,11 +6,13 @@ import com.avwaveaf.fleetifyreport.core.domain.repository.VehicleRepository;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.profile.ProfileUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.AddReportUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.DeleteAllReportUseCase;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.FetchReportsUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.report.GetAllReportUseCase;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.contract.vehicle.GetVehicleUseCase;
-import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.DeleteAllReportInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.profile.ProfileInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report.AddReportInteractor;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report.DeleteAllReportInteractor;
+import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report.FetchReportsInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.report.GetAllReportInteractor;
 import com.avwaveaf.fleetifyreport.core.domain.use_cases.interactor.vehicle.GetVehicleInteractor;
 
@@ -53,5 +55,11 @@ public class UseCaseModule {
     @Singleton
     public DeleteAllReportUseCase provideDeleteAllReport(ReportRepository reportRepository) {
         return new DeleteAllReportInteractor(reportRepository);
+    }
+
+    @Provides
+    @Singleton
+    public FetchReportsUseCase provideFetchReportsUseCase(ReportRepository reportRepository) {
+        return new FetchReportsInteractor(reportRepository);
     }
 }

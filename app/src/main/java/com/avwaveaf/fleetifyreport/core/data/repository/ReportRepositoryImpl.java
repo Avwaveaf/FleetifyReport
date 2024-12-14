@@ -65,17 +65,7 @@ public class ReportRepositoryImpl implements ReportRepository {
             @Override
             protected Single<Boolean> shouldFetch(List<Report> cachedData) {
                 boolean net = ConnectivityUtil.isNetworkAvailable(context);
-                if (net) {
-                    if (vehicleLicenseNumber.trim().isEmpty()) {
-                        return reportLocalDataSource.getReportsCount()
-                                .map(count -> count == 0);
-                    } else {
-                        return reportLocalDataSource.getReportsCountByLicense("%" + vehicleLicenseNumber + "%")
-                                .map(count -> count == 0);
-                    }
-                } else {
-                    return Single.just(Boolean.FALSE);
-                }
+                return Single.just(net && (cachedData == null || cachedData.isEmpty()));
             }
 
 
@@ -86,6 +76,42 @@ public class ReportRepositoryImpl implements ReportRepository {
                     return reportLocalDataSource.getCachedReports();
                 }
                 return reportLocalDataSource.getReportsByLicense("%" + vehicleLicenseNumber + "%");
+            }
+        }.asObservable();
+    }
+
+    @Override
+    public Observable<Resource<List<Report>>> fetchReports(String userId) {
+        return new NetworkBoundResource<List<Report>, Resource<List<ReportDTO>>>() {
+
+            @Override
+            protected Observable<Resource<List<ReportDTO>>> createCall() {
+                return reportRemoteDataSource.getAllReport(userId, "");
+            }
+
+            @Override
+            protected List<Report> processResponse(Resource<List<ReportDTO>> response) {
+                if (response.getData().isEmpty()) {
+                    return new ArrayList<>();
+                }
+                return ReportMapper.toDomainList(response.getData());
+            }
+
+
+            @Override
+            protected void saveCallResult(List<Report> items) {
+                reportLocalDataSource.saveReports(items);
+            }
+
+            @Override
+            protected Single<Boolean> shouldFetch(List<Report> cachedData) {
+                return Single.just(Boolean.TRUE);
+            }
+
+
+            @Override
+            protected Observable<List<Report>> loadFromCache() {
+                return reportLocalDataSource.getCachedReports();
             }
         }.asObservable();
     }

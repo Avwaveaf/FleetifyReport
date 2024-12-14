@@ -29,4 +29,6 @@
     <string name="data_kosong_state_title">Data Kosong</string>
     <string name="data_tidak_di_temukan_buat_laporan_baru_dengan_tombol_di_bawah_atau_cari_data_lain_empty_state_prompt">data tidak di temukan, buat laporan baru dengan tombol di bawah. atau cari data lain</string>
     <string name="kosongkan_kolom_pencarian">Kosongkan kolom pencarian</string>
+    <string name="kembali_btn">Kembali</string>
+    <string name="cari_report_title">Cari Report</string>
 </resources>

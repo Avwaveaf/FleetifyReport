@@ -7,6 +7,6 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 
-public interface DeleteAllReportUseCase {
+public interface FetchReportsUseCase {
     Observable<Resource<List<Report>>> execute(String userId);
 }

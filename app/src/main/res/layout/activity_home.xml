@@ -36,7 +36,7 @@
             android:text="@string/laporan_keluhan_kendaraan_title"
             android:textAppearance="@style/TextBodyMedium"
             app:layout_constraintStart_toStartOf="@id/iv_app_logo"
-            app:layout_constraintTop_toBottomOf="@id/edt_search_report" />
+            app:layout_constraintTop_toBottomOf="@id/iv_app_logo" />
 
         <TextView
             android:id="@+id/tv_full_name"
@@ -57,35 +57,6 @@
             android:drawableBottom="@drawable/ic_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_app_logo" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_search_report"
-            android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_search"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_rounded_edt"
-            android:padding="16dp"
-            android:visibility="gone"
-            android:alpha="0"
-            tools:visibility="visible"
-            android:hint="@string/masukan_plat_nomor_mobil_hint"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/btn_clear_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="@string/kosongkan_kolom_pencarian"
-            android:src="@drawable/ic_close"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toTopOf="@id/edt_search_report"
-            app:layout_constraintEnd_toEndOf="@id/edt_search_report"
-            app:layout_constraintBottom_toBottomOf="@id/edt_search_report"
-            android:visibility="gone"
-        tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

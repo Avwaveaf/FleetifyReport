@@ -13,6 +13,7 @@ import com.avwaveaf.fleetifyreport.core.utils.NetworkErrorUtil;
 import com.avwaveaf.fleetifyreport.core.utils.Resource;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.inject.Inject;
 
@@ -25,8 +26,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class HomeViewModel extends ViewModel {
     private final GetAllReportUseCase getAllReportUseCase;
     private final DeleteAllReportUseCase deleteAllReportUseCase;
-
     private final CompositeDisposable disposable = new CompositeDisposable();
+
+    private final AtomicBoolean isRefreshing = new AtomicBoolean(false);
 
     private final MutableLiveData<Resource<List<Report>>> _reportState = new MutableLiveData<>();
     private final MutableLiveData<Profile> profile = new MutableLiveData<>();
@@ -52,6 +54,9 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void loadAllReports() {
+        if (_reportState.getValue() != null && _reportState.getValue().getData() != null && !_reportState.getValue().getData().isEmpty()) {
+            return;
+        }
         _reportState.postValue(Resource.loading(null));
 
         // Pass vehicleNumber as a parameter to the use case
@@ -65,28 +70,29 @@ public class HomeViewModel extends ViewModel {
     }
 
 
-    public void loadAllReports(String vehicleNumber) {
-        _reportState.postValue(Resource.loading(null));
-
-        // Pass vehicleNumber as a parameter to the use case
-        disposable.add(getAllReportUseCase.execute("k7jPfBcEjFnSlG2", vehicleNumber)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        _reportState::postValue,
-                        throwable -> _reportState.postValue(NetworkErrorUtil.handleError(throwable))
-                ))
-        ;
-    }
-
     public void refreshReports() {
+        if (isRefreshing.get()) return;
+
+        isRefreshing.set(true);
         _reportState.postValue(Resource.loading(null));
-        disposable.add(deleteAllReportUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::loadAllReports
-                ));
+
+        disposable.add(
+                deleteAllReportUseCase
+                        .execute("k7jPfBcEjFnSlG2")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doFinally(() -> isRefreshing.set(false))
+                        .subscribe(
+                                resource -> {
+                                    if (resource.getStatus() == Resource.Status.SUCCESS) {
+                                        _reportState.postValue(resource);
+                                    } else {
+                                        _reportState.postValue(resource); // Handle error or loading states
+                                    }
+                                },
+                                throwable -> _reportState.postValue(NetworkErrorUtil.handleError(throwable))
+                        )
+        );
     }
 
 

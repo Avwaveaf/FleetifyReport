@@ -23,5 +23,10 @@ public interface ReportRepository {
             String vehicleLicenseNumber
     );
 
+    Observable<Resource<List<Report>>> fetchReports(
+            String userId
+    );
+
+
     void deleteAllReports();
 }
