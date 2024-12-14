@@ -118,19 +118,19 @@ buildTypes {
 
 Here are some screenshots of the Fleetify Report app in action:
 
-| Screen 1               | Screen 2               | Screen 3               |
+|    Splash Screen            | Home Screen             | Create Report Screen              |
 |------------------------|------------------------|------------------------|
 | ![Splash Screen](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040753_Fleetify%20Report.jpg) | ![Home Screen](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040758_Fleetify%20Report.jpg) | ![Create Report Screen](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040827_Fleetify%20Report.jpg) |
 
-| Screen 4               | Screen 5               | Screen 6               |
+| Search Report Screen             | Select Vehicle Screen           | Select Attachment Source              |
 |------------------------|------------------------|------------------------|
 | ![Search Report Screen](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040816_Fleetify%20Report.jpg) | ![Select Vehicle Screen](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040831_Fleetify%20Report.jpg) | ![Select Attachment Source](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040837_Fleetify%20Report.jpg) |
 
-| Screen 7               | Screen 8               | Screen 9               |
+| Picture taken result          | Camera Screen            | Loading Submission         |
 |------------------------|------------------------|------------------------|
 | ![Picture taken result](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040918_Fleetify%20Report.jpg) | ![Camera Screen](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040843_Fleetify%20Report.jpg) | ![Loading Submission](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040926_Fleetify%20Report.jpg) |
 
-| Screen 10              | Screen 11              | Screen 12              |
+| Success Submission         | Refresh layout            | Shimmer Loading           |
 |------------------------|------------------------|------------------------|
 | ![Success Submission](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040933_Fleetify%20Report.jpg) | ![Refresh layout](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040940_Fleetify%20Report.jpg) | ![Shimmer Loading](https://github.com/Avwaveaf/FleetifyReport/blob/main/screenshots/Screenshot_20241214-040942_Fleetify%20Report.jpg) |
 
